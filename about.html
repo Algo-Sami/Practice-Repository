@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qazi Anwaar | About Me</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --bg-soft: #121a2f;
+            --card: rgba(17, 24, 39, 0.72);
+            --card-strong: #111827;
+            --primary: #7dd3fc;
+            --secondary: #a78bfa;
+            --accent: #fbbf24;
+            --text: #e5eefb;
+            --muted: #a8b4c7;
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(125, 211, 252, 0.18), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.18), transparent 35%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(18px);
+            background: rgba(11, 16, 32, 0.75);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 76px;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .brand span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.9rem 1.5rem;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #07111d;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border-color: var(--border);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text);
+        }
+
+        .shell {
+            width: min(980px, 100%);
+            margin: 0 auto;
+            padding: 42px 28px;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.86);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.45);
+            text-align: center;
+        }
+
+        .shell .badge {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid rgba(125, 211, 252, 0.24);
+            border-radius: 999px;
+            background: rgba(125, 211, 252, 0.08);
+            color: var(--primary);
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .shell h1 {
+            font-size: clamp(2.6rem, 5vw, 5rem);
+            letter-spacing: -0.05em;
+            line-height: 1.05;
+        }
+
+        .shell .gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .shell p {
+            max-width: 680px;
+            margin: 18px auto 30px;
+            color: var(--muted);
+            font-size: 1.08rem;
+            line-height: 1.7;
+        }
+
+        .shell .actions {
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        .hero {
+            padding: 90px 0 70px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 38px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 0.5rem 0.9rem;
+            border: 1px solid rgba(125, 211, 252, 0.25);
+            border-radius: 999px;
+            background: rgba(125, 211, 252, 0.08);
+            color: var(--primary);
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.8rem, 4vw, 4.8rem);
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lead {
+            margin: 22px 0 28px;
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 34px;
+        }
+
+        .mini-stats {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .metric-box {
+            min-width: 135px;
+        }
+
+        .metric-box strong {
+            display: block;
+            font-size: 1.7rem;
+            color: var(--text);
+        }
+
+        .metric-box span {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .profile-card {
+            position: relative;
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.9), rgba(11, 16, 32, 0.9));
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-image {
+            position: relative;
+            height: 420px;
+            background: linear-gradient(135deg, rgba(125, 211, 252, 0.2), rgba(167, 139, 250, 0.35));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .profile-image::before {
+            content: "QA";
+            font-size: 8rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.12);
+            letter-spacing: 0.08em;
+        }
+
+        .floating-card {
+            position: absolute;
+            right: 18px;
+            bottom: 18px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 1rem 1.1rem;
+            min-width: 170px;
+        }
+
+        .floating-card .label {
+            display: block;
+            color: var(--muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .floating-card strong {
+            font-size: 1.75rem;
+            color: var(--text);
+        }
+
+        section {
+            padding: 28px 0 80px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 26px;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: clamp(2rem, 3vw, 3rem);
+            letter-spacing: -0.04em;
+        }
+
+        .section-head span {
+            color: var(--muted);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 26px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .card p {
+            margin: 0 0 16px;
+            color: var(--muted);
+        }
+
+        .info-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .info-item {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .info-item small {
+            color: var(--muted);
+            display: block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .info-item strong {
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            padding: 0.8rem 1rem;
+            border-radius: 999px;
+            background: rgba(125, 211, 252, 0.06);
+            border: 1px solid rgba(125, 211, 252, 0.16);
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 10px;
+        }
+
+        .value-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 22px;
+        }
+
+        .value-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.15rem;
+        }
+
+        .value-card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .contact {
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .contact-box {
+            display: inline-block;
+            padding: 24px 32px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.02);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-box h3 {
+            margin: 0 0 10px;
+            font-size: clamp(1.7rem, 2vw, 2.4rem);
+        }
+
+        .contact-box p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        @media (max-width: 860px) {
+            .hero-grid,
+            .about-grid,
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                flex-direction: column;
+                justify-content: center;
+                padding: 18px 0;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .section-head {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="container nav">
+            <a href="index.html" class="brand"><span>Qazi</span> Anwaar</a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="shell">
+                    <div class="badge">Professional Portfolio</div>
+                    <h1>Welcome to <span class="gradient">Qazi Anwaar</span></h1>
+                    <p>
+                        A focused creator and digital professional dedicated to delivering polished, modern,
+                        and impactful work with clarity, style, and purpose.
+                    </p>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="#experience">About Me</a>
+                        <a class="btn btn-secondary" href="index.html">Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Professional Profile</h2>
+                    <span>Building with purpose and precision</span>
+                </div>
+
+                <div class="about-grid">
+                    <div class="card">
+                        <p>
+                            I specialize in crafting refined digital experiences that are visually strong, functionally
+                            reliable, and aligned with real-world goals. My approach balances creativity with execution,
+                            helping brands and ideas stand out with clarity and confidence.
+                        </p>
+                        <p>
+                            From concept development to polished final results, I focus on detail, communication, and a
+                            professional standard that makes every project look intentional and trustworthy.
+                        </p>
+
+                        <div class="info-list">
+                            <div class="info-item">
+                                <small>Name</small>
+                                <strong>Qazi Anwaar</strong>
+                            </div>
+                            <div class="info-item">
+                                <small>Specialty</small>
+                                <strong>Digital Design</strong>
+                            </div>
+                            <div class="info-item">
+                                <small>Location</small>
+                                <strong>Worldwide</strong>
+                            </div>
+                            <div class="info-item">
+                                <small>Email</small>
+                                <strong>qazianwaar@example.com</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="section-head" style="margin-bottom: 18px;">
+                            <h2 style="font-size: 1.8rem;">Core Skills</h2>
+                        </div>
+                        <div class="skills-wrap">
+                            <span class="skill">Web Design</span>
+                            <span class="skill">Brand Identity</span>
+                            <span class="skill">Creative Strategy</span>
+                            <span class="skill">UI/UX</span>
+                            <span class="skill">Content Planning</span>
+                            <span class="skill">Digital Marketing</span>
+                            <span class="skill">Communication</span>
+                            <span class="skill">Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <h2>Values & Approach</h2>
+                    <span>Professional standards that drive results</span>
+                </div>
+
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h3>Quality First</h3>
+                        <p>I believe every detail contributes to trust, clarity, and a stronger final impression.</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>Creative Thinking</h3>
+                        <p>Ideas become stronger when they are shaped with strategy, purpose, and originality.</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>Growth Mindset</h3>
+                        <p>Continuous learning, refinement, and adaptability help me create meaningful outcomes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container contact">
+                <div class="contact-box">
+                    <h3>Let’s build something remarkable.</h3>
+                    <p>Connect with Qazi Anwaar for professional, modern, and purpose-driven digital work.</p>
+                    <div class="actions" style="justify-content:center; margin-top: 24px; margin-bottom: 0;">
+                        <a class="btn btn-primary" href="mailto:qazianwaar@example.com">Email Me</a>
+                        <a class="btn btn-secondary" href="index.html">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
