@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f8f7f3">
+    <title>Sunday Supply — Good finds for everyday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --ink:#202620; --muted:#777c73; --paper:#f8f7f3; --green:#385743; --line:#e7e6df; --accent:#dce6d8; }
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { margin:0; background:var(--paper); color:var(--ink); font-family:"DM Sans",Arial,sans-serif; }
+        a { color:inherit; text-decoration:none; }
+        button { color:inherit; font:inherit; }
+        .announcement { padding:10px 16px; background:var(--green); color:white; text-align:center; font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
+        .header { max-width:1280px; margin:auto; padding:23px 36px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; }
+        .nav { display:flex; gap:25px; align-items:center; }
+        .nav a,.actions a { font-size:12px; color:#4f554e; transition:color .2s; }
+        .nav a:hover,.actions a:hover { color:var(--green); }
+        .logo { font-family:"Playfair Display",Georgia,serif; font-size:24px; font-weight:700; letter-spacing:-1.2px; white-space:nowrap; }
+        .logo span { color:#85977d; }
+        .actions { display:flex; justify-content:flex-end; align-items:center; gap:21px; }
+        .bag-count { display:inline-grid; width:19px; height:19px; margin-left:4px; place-items:center; border-radius:50%; background:var(--green); color:white; font-size:10px; }
+        .menu-toggle { display:none; padding:8px; border:0; background:none; cursor:pointer; }
+        .hero { position:relative; display:grid; min-height:510px; max-width:1440px; margin:0 auto; overflow:hidden; align-items:center; background:#e7ebe2; }
+        .hero-photo { position:absolute; inset:0 0 0 42%; background:linear-gradient(90deg,#e7ebe2 0%,#e7ebe200 27%),url("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1800&q=85") center 43%/cover; }
+        .hero-copy { position:relative; z-index:1; width:min(510px,52%); padding:78px 0 80px max(7vw,48px); }
+        .eyebrow { margin:0 0 18px; color:var(--green); font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+        h1,h2,h3,p { margin-top:0; }
+        h1,h2 { font-family:"Playfair Display",Georgia,serif; font-weight:500; }
+        h1 { margin-bottom:19px; font-size:clamp(48px,6vw,76px); letter-spacing:-2.8px; line-height:1.02; }
+        .hero-copy > p:not(.eyebrow) { max-width:365px; margin-bottom:29px; color:#5e665d; font-size:14px; line-height:1.8; }
+        .button { display:inline-flex; min-height:47px; padding:0 24px; align-items:center; justify-content:center; border:1px solid var(--green); background:var(--green); color:white; font-size:11px; font-weight:600; letter-spacing:.06em; transition:background .2s,color .2s; }
+        .button:hover { background:transparent; color:var(--green); }
+        .section { max-width:1280px; margin:0 auto; padding:88px 36px; }
+        .section-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:30px; }
+        .section-heading .eyebrow { margin-bottom:10px; }
+        h2 { margin-bottom:0; font-size:clamp(32px,4vw,44px); letter-spacing:-1.2px; }
+        .text-link { padding-bottom:4px; border-bottom:1px solid #889485; color:#4f5d4d; font-size:11px; }
+        .categories { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+        .category { position:relative; min-height:260px; overflow:hidden; background:#e9e7de; }
+        .category img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; transition:transform .45s; }
+        .category:hover img { transform:scale(1.04); }
+        .category::after { position:absolute; inset:45% 0 0; background:linear-gradient(transparent,#1118); content:""; }
+        .category-label { position:absolute; z-index:1; bottom:19px; left:19px; color:white; font-family:"Playfair Display",Georgia,serif; font-size:23px; }
+        .products { background:#f0efe9; }
+        .products .section { padding-top:78px; padding-bottom:86px; }
+        .product-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:17px; }
+        .product-image { position:relative; aspect-ratio:.84; overflow:hidden; background:#e6e3db; }
+        .product-image img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+        .product-card:hover .product-image img { transform:scale(1.035); }
+        .tag { position:absolute; top:12px; left:12px; padding:6px 9px; background:#f8f7f3; font-size:9px; letter-spacing:.08em; text-transform:uppercase; }
+        .quick-add { position:absolute; right:10px; bottom:10px; left:10px; padding:12px; border:0; background:#f8f7f3ed; cursor:pointer; font-size:10px; font-weight:600; letter-spacing:.06em; opacity:0; transform:translateY(5px); transition:opacity .2s,transform .2s; }
+        .product-card:hover .quick-add,.quick-add:focus-visible { opacity:1; transform:translateY(0); }
+        .product-info { display:flex; justify-content:space-between; gap:10px; padding-top:13px; font-size:11px; }
+        .product-info p { margin:0; color:var(--muted); }
+        .product-info strong { font-weight:600; }
+        .price { white-space:nowrap; }
+        .story { display:grid; grid-template-columns:1fr 1fr; min-height:410px; background:#e1e8dc; }
+        .story-image { min-height:350px; background:url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1100&q=85") center/cover; }
+        .story-copy { max-width:550px; padding:70px clamp(32px,7vw,100px); align-self:center; }
+        .story-copy h2 { margin-bottom:17px; }
+        .story-copy p:not(.eyebrow) { margin-bottom:23px; color:#626c60; font-size:13px; line-height:1.9; }
+        .story-copy .text-link { display:inline-block; }
+        .newsletter { padding:72px 24px; background:#f8f7f3; text-align:center; }
+        .newsletter h2 { margin-bottom:12px; }
+        .newsletter > p:not(.eyebrow) { color:var(--muted); font-size:12px; }
+        .signup { display:flex; max-width:390px; margin:24px auto 0; border-bottom:1px solid #9ca397; }
+        .signup input { flex:1; min-width:0; padding:13px 2px; border:0; outline:0; background:transparent; font:inherit; font-size:11px; }
+        .signup button { padding:0 4px 0 15px; border:0; background:none; color:var(--green); cursor:pointer; font-size:10px; font-weight:700; letter-spacing:.08em; }
+        .footer { padding:27px 36px; border-top:1px solid var(--line); color:var(--muted); font-size:10px; }
+        .footer-inner { max-width:1208px; margin:auto; display:flex; justify-content:space-between; gap:16px; }
+        .footer-links { display:flex; gap:18px; }
+        @media (max-width:800px) {
+            .header { padding:18px 22px; grid-template-columns:1fr auto 1fr; }
+            .menu-toggle { display:block; justify-self:start; }
+            .header .nav { display:none; position:absolute; z-index:5; top:112px; right:0; left:0; padding:18px 24px; flex-direction:column; align-items:flex-start; background:var(--paper); border-top:1px solid var(--line); }
+            .header .nav.open { display:flex; }
+            .hero { min-height:560px; align-items:end; }
+            .hero-photo { inset:0; background:linear-gradient(0deg,#e7ebe2 0%,#e7ebe2ee 20%,#e7ebe200 75%),url("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85") center/cover; }
+            .hero-copy { width:100%; padding:220px 28px 38px; }
+            .categories,.product-grid { grid-template-columns:repeat(2,1fr); }
+            .category { min-height:230px; }
+            .section { padding:64px 22px; }
+            .story { grid-template-columns:1fr; }
+            .story-image { min-height:320px; }
+            .story-copy { padding:48px 28px; }
+            .quick-add { opacity:1; transform:none; }
+        }
+        @media (max-width:480px) {
+            .announcement { font-size:9px; }
+            .header { padding:16px; gap:8px; }
+            .logo { font-size:21px; }
+            .actions { gap:0; }
+            .actions .search-link { display:none; }
+            .hero-copy { padding-right:20px; padding-left:20px; }
+            h1 { font-size:51px; }
+            .section-heading { align-items:start; flex-direction:column; }
+            .category { min-height:185px; }
+            .category-label { bottom:13px; left:13px; font-size:19px; }
+            .product-grid { gap:20px 11px; }
+            .product-info { flex-direction:column; gap:4px; }
+            .footer-inner { flex-direction:column; }
+        }
+        @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
+    </style>
+</head>
+<body>
+    <div class="announcement">A little something for you — complimentary shipping over $75</div>
+    <header class="header">
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+        <nav class="nav" id="main-nav" aria-label="Main navigation">
+            <a href="#shop">Shop all</a><a href="#categories">Collections</a><a href="#our-story">Our story</a>
+        </nav>
+        <a class="logo" href="#top" aria-label="Sunday Supply home">sunday supply<span>.</span></a>
+        <div class="actions"><a class="search-link" href="#shop">Search</a><a href="#bag" aria-label="Shopping bag">Bag <span class="bag-count" id="bag-count">0</span></a></div>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-photo" role="img" aria-label="A curated selection of everyday fashion"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">For slower, sunnier days</p>
+                <h1 id="hero-title">Find your<br>everyday.</h1>
+                <p>Thoughtful pieces for getting dressed, setting the table, and making the little moments feel like something.</p>
+                <a class="button" href="#shop">Explore the collection&nbsp; →</a>
+            </div>
+        </section>
+
+        <section class="section" id="categories">
+            <div class="section-heading"><div><p class="eyebrow">A good place to start</p><h2>Shop by mood</h2></div><a class="text-link" href="#shop">Explore everything&nbsp; →</a></div>
+            <div class="categories">
+                <a class="category" href="#shop"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80" alt="Relaxed everyday clothing" loading="lazy"><span class="category-label">Wear</span></a>
+                <a class="category" href="#shop"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=700&q=80" alt="Warm, inviting home interior" loading="lazy"><span class="category-label">Live</span></a>
+                <a class="category" href="#shop"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=700&q=80" alt="Fresh flowers in soft light" loading="lazy"><span class="category-label">Gather</span></a>
+                <a class="category" href="#shop"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=700&q=80" alt="Stationery and a notebook" loading="lazy"><span class="category-label">Little things</span></a>
+            </div>
+        </section>
+
+        <section class="products" id="shop">
+            <div class="section">
+                <div class="section-heading"><div><p class="eyebrow">The ones we keep reaching for</p><h2>Currently loving</h2></div><a class="text-link" href="#shop">Shop all&nbsp; →</a></div>
+                <div class="product-grid">
+                    <article class="product-card"><div class="product-image"><img src="https://images.unsplash.com/photo-1548624149-fd5f7cd8e1d2?auto=format&fit=crop&w=700&q=80" alt="Natural cotton tote bag" loading="lazy"><span class="tag">Bestseller</span><button class="quick-add" type="button">Add to bag</button></div><div class="product-info"><div><strong>Everyday Market Tote</strong><p>Natural cotton</p></div><strong class="price">$28</strong></div></article>
+                    <article class="product-card"><div class="product-image"><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=700&q=80" alt="Simple leather everyday sneakers" loading="lazy"><button class="quick-add" type="button">Add to bag</button></div><div class="product-info"><div><strong>Sunday Sneaker</strong><p>Soft oat / recycled canvas</p></div><strong class="price">$84</strong></div></article>
+                    <article class="product-card"><div class="product-image"><img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=700&q=80" alt="Handmade ceramic mug" loading="lazy"><span class="tag">Handmade</span><button class="quick-add" type="button">Add to bag</button></div><div class="product-info"><div><strong>Sunday Morning Mug</strong><p>Speckled stoneware</p></div><strong class="price">$32</strong></div></article>
+                    <article class="product-card"><div class="product-image"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80" alt="Minimal wristwatch with a leather band" loading="lazy"><button class="quick-add" type="button">Add to bag</button></div><div class="product-info"><div><strong>Daily Classic Watch</strong><p>Walnut / brushed brass</p></div><strong class="price">$96</strong></div></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="story" id="our-story">
+            <div class="story-image" role="img" aria-label="A welcoming independent shop filled with thoughtfully chosen goods"></div>
+            <div class="story-copy"><p class="eyebrow">A little more meaning</p><h2>Good things, chosen with care.</h2><p>We started Sunday Supply with a simple idea: shopping should feel personal. So we look for useful, well-made pieces from independent makers and brands that care about how things are made.</p><a class="text-link" href="#our-story">Get to know us&nbsp; →</a></div>
+        </section>
+
+        <section class="newsletter"><p class="eyebrow">A nice note, now and then</p><h2>Stay for a little while.</h2><p>New finds, thoughtful ideas, and 10% off your first order.</p><form class="signup" id="signup-form"><label for="email" class="visually-hidden"></label><input id="email" type="email" placeholder="Your email address" required aria-label="Your email address"><button type="submit">SIGN ME UP&nbsp; →</button></form></section>
+    </main>
+    <footer class="footer"><div class="footer-inner"><span>© <span id="year"></span> Sunday Supply. Made for everyday.</span><div class="footer-links"><a href="#our-story">About</a><a href="mailto:hello@sundaysupply.example">Contact</a><a href="#top">Instagram</a></div></div></footer>
+
+    <script>
+        const menuButton = document.querySelector('.menu-toggle');
+        const navigation = document.querySelector('.nav');
+        menuButton.addEventListener('click', () => {
+            const isOpen = navigation.classList.toggle('open');
+            menuButton.setAttribute('aria-expanded', String(isOpen));
+            menuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+        navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+            navigation.classList.remove('open');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.setAttribute('aria-label', 'Open menu');
+        }));
+        let bagCount = 0;
+        document.querySelectorAll('.quick-add').forEach(button => button.addEventListener('click', () => {
+            bagCount += 1;
+            document.querySelector('#bag-count').textContent = bagCount;
+            button.textContent = 'Added ✓';
+            window.setTimeout(() => button.textContent = 'Add to bag', 1100);
+        }));
+        document.querySelector('#signup-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const button = event.currentTarget.querySelector('button');
+            button.textContent = 'THANK YOU ✓';
+            event.currentTarget.reset();
+        });
+        document.querySelector('#year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
